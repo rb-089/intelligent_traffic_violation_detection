@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{# Override container styles #}
+{% block container_class %}bg-transparent shadow-none text-dark text-center{% endblock %}
+{% block container_style %}padding: 0; background: transparent; box-shadow: none;{% endblock %}
+
+{% block content %}
+<style>
+    .ranking-section {
+        background: url("{% static 'images/home4.jpg' %}") no-repeat center center;
+        background-size: cover;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 0;
+    }
+
+    .ranking-card {
+        background: rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(12px);
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+        padding: 35px;
+        width: 95%;
+        max-width: 950px;
+        animation: fadeInUp 0.6s ease-out;
+        color: white;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .ranking-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+    }
+
+    .ranking-card h2 {
+        font-weight: bold;
+        color: #bfff00;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .ranking-card p {
+        font-size: 16px;
+        color: #d1fcd3;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .table th, .table td {
+        padding: 12px 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: left;
+        color: white;
+    }
+
+    .table th {
+        background-color: rgba(191, 255, 0, 0.1);
+        color: #bfff00;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+        cursor: pointer;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<section class="ranking-section">
+    <div class="ranking-card">
+        <h2>🚧 Accident-Prone Locations</h2>
+        <p>Below are the rankings of grouped locations based on reported incidents:</p>
+
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Grouped Location(s)</th>
+                    <th>Incident Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for location in rankings %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ location.location }}</td>
+                    <td>{{ location.incident_count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

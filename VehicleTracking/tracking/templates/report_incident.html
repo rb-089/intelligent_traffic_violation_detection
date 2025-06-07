@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Report an Incident | Traffic Monitoring System{% endblock %}
+
+{% block container_class %}bg-transparent shadow-none text-white text-center{% endblock %}
+{% block container_style %}padding: 0;{% endblock %}
+
+{% block content %}
+<section class="bg-cover bg-center bg-no-repeat"
+    style="background-image: url({% static 'images/home3.jpg' %}); min-height: 100vh;">
+
+    <div class="d-flex justify-content-center align-items-center"
+        style="min-height: 100vh; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);">
+        <div class="incident-form animate-fadeInUp">
+            <h2>📍 Report an Incident</h2>
+            <p>Fill out the form below to report an incident. Photos are optional but can help provide more context.</p>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group text-start">
+                    {{ form.name.label_tag }}
+                    {{ form.name }}
+                </div>
+
+                <div class="form-group text-start">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                </div>
+
+                <div class="form-group text-start">
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location" class="form-control" readonly>
+                    <small class="form-text text-light">Your current location will be automatically detected.</small>
+                </div>
+
+                <div class="form-group text-start">
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+                </div>
+
+                <div class="form-group text-start">
+                    {{ form.photos.label_tag }}
+                    {{ form.photos }}
+                </div>
+
+                <button type="submit" class="btn btn-glow w-100">🚀 Submit</button>
+            </form>
+
+            {% for message in messages %}
+            <div class="alert alert-success mt-3">{{ message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                const lat = position.coords.latitude;
+                const long = position.coords.longitude;
+                document.getElementById("location").value = `${lat}, ${long}`;
+            }, function (error) {
+                console.error("Error getting location: ", error);
+            });
+        } else {
+            console.error("Geolocation is not supported by this browser.");
+        }
+    });
+</script>
+
+<style>
+    .incident-form {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        padding: 35px;
+        border-radius: 16px;
+        width: 90%;
+        max-width: 600px;
+        color: #fff;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        animation: fadeInUp 0.7s ease-out;
+        margin: auto;
+    }
+
+    h2 {
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #bfff00;
+        text-shadow: 1px 1px 3px black;
+    }
+
+    p {
+        font-size: 17px;
+        margin-bottom: 25px;
+        color: #fff;
+        text-shadow: 1px 1px 2px black;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        background-color: rgba(255, 255, 255, 0.85);
+        color: #000;
+    }
+
+    .btn-glow {
+        background-color: #76a728;
+        color: white;
+        border: none;
+        font-size: 18px;
+        padding: 12px 0;
+        border-radius: 6px;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+    }
+
+    .btn-glow:hover {
+        background-color: #212a8800;
+        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.7);
+        transform: scale(1.03);
+    }
+
+    .alert {
+        font-size: 16px;
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 5px;
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fadeInUp {
+        animation: fadeInUp 0.8s ease-out;
+    }
+</style>
+{% endblock %}

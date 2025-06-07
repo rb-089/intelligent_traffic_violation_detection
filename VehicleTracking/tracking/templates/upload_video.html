@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block container_class %}bg-transparent shadow-none text-dark text-center{% endblock %}
+{% block container_style %}padding: 0;{% endblock %}
+
+{% block content %}
+<style>
+    .form-outer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(2px);
+    }
+
+    .upload-card {
+        background: rgba(0, 0, 0, 0.65); /* Darker and more opaque */
+        border: 2px solid #ffffff30;
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        padding: 35px;
+        max-width: 500px;
+        width: 90%;
+        animation: fadeInUp 0.6s ease-out;
+        transition: all 0.4s ease;
+        color: white;
+    }
+
+    .upload-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 16px 40px rgba(255, 255, 255, 0.2);
+        animation: pulse 1.2s infinite;
+    }
+
+    .upload-card h1 {
+        font-weight: bold;
+        color: #00ffae;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .btn-glow {
+        background-color: #bfff00;
+        color: black;
+        border: none;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 15px rgba(191, 255, 0, 0.4);
+    }
+
+    .btn-glow:hover {
+        background-color: black;
+        color: #bfff00;
+        box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+        transform: scale(1.05);
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1.02);
+            box-shadow: 0 0 0 rgba(255, 255, 255, 0.3);
+        }
+        50% {
+            transform: scale(1.025);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        100% {
+            transform: scale(1.02);
+            box-shadow: 0 0 0 rgba(255, 255, 255, 0.3);
+        }
+    }
+
+    label.form-label {
+        font-weight: 500;
+        color: #bfff00;
+    }
+
+    input.form-control {
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid #ccc;
+        color: black;
+    }
+
+    input.form-control::placeholder {
+        color: #666;
+    }
+</style>
+
+
+<section class="bg-cover bg-center bg-no-repeat" style="background-image: url('{% static 'images/home2.jpg' %}'); min-height: 100vh;">
+    <div class="form-outer">
+        <div class="upload-card">
+            <h1>🎥 Upload Video for Vehicle Detection</h1>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3 text-start">
+                    <label class="form-label">📁 Video File:</label>
+                    <input type="file" name="video" class="form-control" accept="video/*" required>
+                </div>
+                <div class="mb-3 text-start">
+                    <label class="form-label">🚦 Speed Limit (km/h):</label>
+                    <input type="number" name="speed_limit" class="form-control" value="60" required>
+                </div>
+                <button type="submit" class="btn btn-glow w-100">🚀 Upload</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="bg-cover bg-center bg-no-repeat flex items-center justify-center px-4 py-16" style="background-image: url('{% static 'images/contactbg.jpg' %}'); min-height: 100vh;">
+  <div class="bg-black/50 backdrop-blur-xl p-10 rounded-2xl max-w-2xl w-full shadow-2xl text-white border border-white/20">
+    <h2 class="text-3xl font-bold mb-6 text-white text-center">Get in Touch</h2>
+    <p class="text-lg mb-8 text-center">
+      We'd love to hear from you! Reach out to us via the info below.
+    </p>
+
+    <div class="space-y-4 text-base leading-relaxed">
+      <p><span class="font-semibold">📧 Email:</span> <a href="mailto:traffic-monitoring@support.com" class="text-blue-300 underline">traffic-monitoring@support.com</a></p>
+      <p><span class="font-semibold">📍 Address:</span> 123 Safety Street, New Delhi, India</p>
+      <p><span class="font-semibold">📞 Phone:</span> +91 98765 43210</p>
+      <p><span class="font-semibold">🌐 Website:</span> <a href="https://yourwebsite.com" class="text-blue-300 underline" target="_blank">yourwebsite.com</a></p>
+      <p><span class="font-semibold">💻 GitHub:</span> <a href="https://github.com/yourusername/traffic-monitoring" class="text-blue-300 underline" target="_blank">github.com/yourusername/traffic-monitoring</a></p>
+    </div>
+  </div>
+</section>
+{% endblock %}

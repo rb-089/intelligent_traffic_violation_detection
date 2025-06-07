@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home | Traffic Monitoring System{% endblock %}
+{% block container_class %}bg-transparent text-white font-sans{% endblock %}
+
+{% block content %}
+<!-- Common Styles -->
+<style>
+  .section-bg {
+    position: relative;
+    border: 3px solid black;
+  }
+
+  .section-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* dark overlay */
+    z-index: 1;
+  }
+
+  .section-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .custom-btn {
+    background-color: #A3E635; /* lime-400 */
+    color: black;
+  }
+
+  .custom-btn:hover {
+    background-color: black;
+    color: #A3E635;
+  }
+</style>
+
+<!-- Section 1: About -->
+<section id="about"
+         class="section-bg h-screen flex items-center justify-center text-center px-6 bg-cover bg-center bg-no-repeat"
+         style="background-image: url('{% static 'images/home1.jpg' %}');"
+         data-aos="fade-up">
+  <div class="section-content bg-transparent p-8 rounded-lg max-w-3xl">
+    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+      Welcome to the Traffic Monitoring System
+    </h2>
+    <p class="text-lg text-white mb-6">
+      Our system uses AI-powered tools to detect traffic violations, analyze accident-prone areas, and help authorities manage urban traffic efficiently. Upload footage, report incidents, and view accident rankings.
+    </p>
+  </div>
+</section>
+
+<!-- Section 2: Upload -->
+<section id="upload"
+         class="section-bg h-screen flex items-center justify-center text-center px-6 bg-cover bg-center bg-no-repeat"
+         style="background-image: url('{% static 'images/home2.jpg' %}');"
+         data-aos="fade-right">
+  <div class="section-content bg-transparent p-8 rounded-lg max-w-3xl">
+    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+      Upload Traffic Footage
+    </h2>
+    <p class="text-lg text-white mb-6">
+      Help improve road safety by uploading surveillance or street footage. Our backend detects helmets, speed violations, and number plates using YOLO and DeepSORT.
+    </p>
+    <a href="/upload-video/" class="inline-block custom-btn text-lg font-semibold px-6 py-3 rounded-lg shadow transition-all duration-300 transform hover:scale-105">
+      Go to Upload Page
+    </a>
+  </div>
+</section>
+
+<!-- Section 3: Report -->
+<section id="report"
+         class="section-bg h-screen flex items-center justify-center text-center px-6 bg-cover bg-center bg-no-repeat"
+         style="background-image: url({% static 'images/home3.jpg' %});"
+         data-aos="fade-left">
+  <div class="section-content bg-transparent p-8 rounded-lg max-w-3xl">
+    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+      Report a Traffic Incident
+    </h2>
+    <p class="text-lg text-white mb-6">
+      Witnessed an accident or violation? Quickly report it here and optionally attach photos to help us analyze and track the case.
+    </p>
+    <a href="/report/" class="inline-block custom-btn text-lg font-semibold px-6 py-3 rounded-lg shadow transition-all duration-300 transform hover:scale-105">
+      Report Incident
+    </a>
+  </div>
+</section>
+
+<!-- Section 4: Rankings -->
+<section id="rankings"
+         class="section-bg h-screen flex items-center justify-center text-center px-6 bg-cover bg-center bg-no-repeat"
+         style="background-image: url('{% static 'images/home4.jpg' %}');"
+         data-aos="fade-up">
+  <div class="section-content bg-transparent p-8 rounded-lg max-w-3xl">
+    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+      Accident Rankings by Location
+    </h2>
+    <p class="text-lg text-white mb-6">
+      Discover high-risk accident zones based on real reports and analysis. Stay informed, stay safe, and help authorities prioritize improvements.
+    </p>
+    <a href="/rankings/" class="inline-block custom-btn text-lg font-semibold px-6 py-3 rounded-lg shadow transition-all duration-300 transform hover:scale-105">
+      View Rankings
+    </a>
+  </div>
+</section>
+{% endblock %}
